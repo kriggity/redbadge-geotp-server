@@ -1,6 +1,8 @@
-#GeoTP Server
-##Getting Started
+<h1>GeoTP Server</h1>
+<h2>Getting Started</h2>
+
 1. Navigate to project folder
+
 + In terminal/command prompt/powershell: ```mkdir server && cd server```
 
 + ```git init && git remote add origin https://github.com/kriggity/redbadge-geotp-server.git```
