@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         status: {
             type: DataTypes.BOOLEAN,
             allowNull: false

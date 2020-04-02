@@ -4,56 +4,45 @@ const Location = require('../db').import('../models/location.js');
 /*********************
 ** POST/CREATE One Location
 **********************/
-router.post('/api/locations/add'), (req, res) => {
+router.post('/add', (req, res) => {
     const locData = {
-        googleId: req.body.googleid,
-        name: req.body.name,
-        status: false,
-        voteCount: 0
+        googleid: req.body.location.googleid,
+        name: req.body.location.name,
+        status: req.body.location.status,
+        votecount: 1
     }
+    // res.status(200).json({location: locData});
     Location.create(locData)
-        .then(loc => res.status(200).json(loc))
-        .catch(err => res.status(500).json({ error: err }))
-}
-
-/*********************
-** GET/READ One Location
-**********************/
-router.get('/api/locations/:id', (req, res) => {
-    // DB id or Google API ID?
-    Location.findOne({
-        where: {
-            googleid: req.params.id
-        }
-    })
-        .then(loc => res.status(200).json(loc))
-        .catch(err => res.status(500).json({ error: err }));
+        .then(loc => res.status(200).json({ location: loc, message: 'Location successfully added' }))
+        .catch(err => res.status(500).json({ error: err, message: 'Location could not be added' }))
 })
 
 /*********************
 ** UPDATE One Location
 **********************/
-router.put('/api/locations/:id'), (req, res) => {
-    // using the DB id, not Google unique id, for this
-    if (!isNaN(req.params.id)) {
-        const locData = {
-            status: req.body.status,
-            votecount: req.body.votecount
-        }
-
-        Location.update(locData, {
-            where: {
-                id: req.params.id
-            }
-        })
-            .then(loc => res.status(200).json(loc))
-            .catch(err => res.status(500).json({ error: err }))
-
-    } else {
-        res.status(404).message("Page does not exist");
+router.put('/:googleid', (req, res) => {
+    // using the Google unique id
+    const locData = {
+        status: req.body.location.status,
+        votecount: req.body.location.votecount
     }
-}
 
+    Location.update(locData, {
+        where: {
+            googleid: req.params.googleid
+        }
+    })
+        .then(loc => res.status(200).json({ location: loc, message: 'Location successfully updated' }))
+        .catch(err => res.status(500).json({ error: "Could not update this location" }))
+
+})
+
+/*
+* 404 Catch All
+*/
+router.get(['*', '/'], (req, res) => {
+    res.status(404).send("*Location page does exist.");
+})
 
 /*
 * router export

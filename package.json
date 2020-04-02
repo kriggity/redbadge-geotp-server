@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kriggity/geotp-server.git"
+    "url": "git+https://github.com/kriggity/cmk-geotp-server.git"
   },
   "author": "Chris Kraft",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kriggity/geotp-server/issues"
+    "url": "https://github.com/kriggity/cmk-geotp-server/issues"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -16,6 +16,10 @@ const user = require('./controllers/usercontroller');
 const location = require('./controllers/locationcontroller');
 const comment = require('./controllers/commentcontroller');
 
+const user_exposed = require('./controllers/user_exposed');
+const location_exposed = require('./controllers/location_exposed');
+const comment_exposed = require('./controllers/comment_exposed');
+
 /****************************************************
  * DB Import and Sync
 ****************************************************/
@@ -31,15 +35,16 @@ app.use(require('./middleware/headers'));
 /****************************************************
  * Exposed Routes
 ****************************************************/
-// Keeping these exposed for initial testing
-app.use('/api/users', user);
-app.use('/api/locations', location);
-app.use('/api/comments', comment);
+app.use('/api/users', user_exposed);
+app.use('/api/locations', location_exposed);
+app.use('/api/comments', comment_exposed);
 
 /****************************************************
  * Protected Routes
-****************************************************/
-// Keeping this commented out for initial testing
-// app.use(require('./middleware/validate-session'));
+ ****************************************************/
+app.use(require('./middleware/validate-session'));
+app.use('/api/users', user);
+app.use('/api/locations', location);
+app.use('/api/comments', comment);
 
 app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));

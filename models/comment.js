@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Comment = sequelize.define('comment', {
         locid: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         },
         userid: {
