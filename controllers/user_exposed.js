@@ -4,6 +4,39 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 /*********************
+** POST/CREATE One User
+**********************/
+router.post('/register', (req, res) => {
+    let fullName = req.body.user.fullname;
+    let email = req.body.user.email;
+    let password = req.body.user.password;
+
+    User.create({
+        email: email,
+        password: bcrypt.hashSync(password, 10),
+        fullname: fullName
+    })
+        .then(
+            createSucccess = user => {
+                let token = jwt.sign({
+                    id: user.id
+                },
+                    process.env.JWT_SECRET, {
+                    expiresIn: 60 * 60 * 24
+                });
+                res.json({
+                    user: user,
+                    message: 'user created',
+                    sessionToken: token
+                });
+            },
+            createError = err => {
+                res.send(500, err.message);
+            }
+        )
+})
+
+/*********************
 ** POST Sign In User
 **********************/
 router.post('/login', (req, res) => {
