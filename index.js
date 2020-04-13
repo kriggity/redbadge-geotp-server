@@ -19,6 +19,7 @@ const comment = require('./controllers/commentcontroller');
 const user_exposed = require('./controllers/user_exposed');
 const location_exposed = require('./controllers/location_exposed');
 const comment_exposed = require('./controllers/comment_exposed');
+const gmap_location_exposed = require('./controllers/gmap_location_exposed');
 
 /****************************************************
  * DB Import and Sync
@@ -38,6 +39,7 @@ app.use(require('./middleware/headers'));
 app.use('/api/users', user_exposed);
 app.use('/api/locations', location_exposed);
 app.use('/api/comments', comment_exposed);
+app.use('/googleapi/locations', gmap_location_exposed);
 
 /****************************************************
  * Protected Routes
