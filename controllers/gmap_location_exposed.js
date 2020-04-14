@@ -4,13 +4,9 @@ const Request = require('request');
 router.get('/:loc', (req, res) => {
     let APIkey = process.env.GMAP;
     let BaseURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-    // let lat = req.params.lat;
-    // let long = req.params.long;
-    // let location = `${lat},${long}`;
     let location = req.params.loc;
-    let url = `${BaseURL}?location=${location}&radius=1609&type=convenience_store|department_store|drugstore|gas_station|grocery_or_supermarket|hardware_store|home_goods_store|pharmacy|shopping_mall|store|supermarket&key=${APIkey}`;
+    let url = `${BaseURL}?location=${location}&rankby=distance&type=convenience_store|department_store|drugstore|gas_station|grocery_or_supermarket|hardware_store|home_goods_store|pharmacy|shopping_mall|store|supermarket&key=${APIkey}`;
 
-    // return res.status(200).json({ "loc": location })
     let options = {
         'method': 'GET',
         'url': url,
@@ -24,7 +20,6 @@ router.get('/:loc', (req, res) => {
             return res.status(200).json(response.body);
 
         })
-        // .then(loc => res.status(200).json({}))
     } else {
         return res.status(500).json({ message: "Need lat and long" });
     }
