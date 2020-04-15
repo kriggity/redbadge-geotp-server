@@ -3,6 +3,8 @@ const User = require('../db').import('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+console.log("you're in user_exposed.js")
+
 /*********************
 ** POST/CREATE One User
 **********************/
@@ -46,9 +48,12 @@ router.post('/login', (req, res) => {
         }
     })
         .then(user => {
+            console.log(".then in router.post in user_exposed.js")
             if (user) {
+                console.log("in the if(user) of the .then in router.post")
                 bcrypt.compare(req.body.user.password, user.password, (err, matches) => {
                     if (matches) {
+                        console.log("in if(matches) within if(user) of the .then in router.post")
 
                         let token = jwt.sign({
                             id: user.id
@@ -64,6 +69,7 @@ router.post('/login', (req, res) => {
                         })
 
                     } else {
+                        console.log("in the else of if(matches) inside if(user) in router.post ")
 
                         res.status(502).send({
                             error: 'Password does not match'
@@ -71,6 +77,7 @@ router.post('/login', (req, res) => {
                     }
                 });
             } else {
+                console.log("in the else of if(user) in router.post")
                 res.status(500).send({
                     error: 'User does not exist'
                 })

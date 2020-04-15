@@ -5,6 +5,11 @@ const Location = require('../db').import('../models/location.js');
 ** POST/CREATE One Location
 **********************/
 router.post('/add', (req, res) => {
+    console.log("*** you're in router.post locationcontroller.js")
+    console.log(" googleid : ", req.body.location.googleid)
+    console.log("name: ", req.body.location.name)
+    console.log("status: ", req.body.location.status)
+    
     const locData = {
         googleid: req.body.location.googleid,
         name: req.body.location.name,

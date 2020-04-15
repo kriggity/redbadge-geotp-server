@@ -25,6 +25,7 @@ const comment_exposed = require('./controllers/comment_exposed');
 ****************************************************/
 const sequelize = require('./db');
 sequelize.sync();
+// sequelize.sync({force:true});
 app.use(express.json());
 
 /****************************************************

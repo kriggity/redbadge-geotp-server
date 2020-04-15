@@ -5,6 +5,7 @@ const Location = require('../db').import('../models/location.js');
 ** GET/READ One Location
 **********************/
 router.get('/:googleid', (req, res) => {
+    console.log("router.get location_exposed req: ", req.params)
     // Google API id 
     Location.findOne({
         where: {
