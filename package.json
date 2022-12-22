@@ -20,7 +20,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "jsonwebtoken": "^8.2.0",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "request": "^2.88.2",
